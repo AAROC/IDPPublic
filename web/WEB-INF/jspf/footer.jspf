@@ -1,0 +1,19 @@
+<%@ page pageEncoding="UTF-8" %>
+ 
+                    </div>
+            </div>
+            <div class="footer">Brought to you by</div>
+            <div class="footer">
+                <span style="float:left; padding:5px;">
+                 <a href="http://www.meraka.org.za"><img src="img/csir_meraka.jpg" alt="CSIR Meraka Institute"></a>
+                </span>
+                <span style="float:right; padding:5px;">
+                    <a href="http://www.sagrid.ac.za"><img src="img/SANCG_logoTransparent-cropped.png" alt="South African National Grid"></a>
+                </span>
+                <span style="float:right; padding: 5px 5px 5px 5px;">
+                    <a href="http://www.sanrena.ac.za"><img src="img/SANReN_tiny.png" alt="South African National Research Network"></a>
+                </span>
+                </div>
+        </div>
+    </body>
+</html>
