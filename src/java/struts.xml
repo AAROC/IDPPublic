@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : struts.xml
+    Created on : 04 January 2012, 12:41
+    Author     : marco
+    Description:
+        Purpose of the document follows.
+-->
+
+<!DOCTYPE struts PUBLIC '-//Apache Software Foundation//DTD Struts Configuration 2.0//EN' 'http://struts.apache.org/dtds/struts-2.0.dtd'>
+<struts>
+    <!--<constant name="struts.devMode" value="false"/>--> 
+    <package name="idp" extends="struts-default" namespace="/">
+        <action name="about">
+            <result>
+                /about.jsp
+            </result>
+        </action>
+        <action name="documentation">
+            <result>
+                /documentation.jsp
+            </result>
+        </action>
+        <action name="providers">
+            <result>
+                /providers.jsp
+            </result>
+        </action>
+        <action name="register">
+            <result>
+                /register.jsp
+            </result>
+        </action>
+        <action name="forgotpass">
+            <result>/forgotpass.jsp</result>
+        </action>
+        
+        <action name="passreset" class="it.infn.ct.security.actions.PassReset">
+            <result name="input">/resetpass.jsp</result>
+            <result name="error">/generalError.jsp</result>
+            <result name="success">/passUpdated.jsp</result>
+        </action>
+        <action name="passrecovery" class="it.infn.ct.security.actions.PassRecovery">
+            <result name="input">/forgotpass.jsp</result>
+            <result name="error">/generalError.jsp</result>
+            <result name="success">/resetpass.jsp</result>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailSubject">Reset password for your IDP account</param>
+            <param name="MailBody">
+Dear _USER_,
+                                                 
+we have received a request to reset your password.
+
+To complete the request copy the following code in the
+web form on the request page along with your new password.
+                
+                _CODE_
+                
+                                                 
+If you have never asked to reset your password just skip this e-mail.
+
+Best regards,
+The IDPOPEN GARR Administrators
+            </param>
+        </action>
+        <action name="confirmRegistration" class="it.infn.ct.security.actions.ConfirmRegistration">
+            <result name="success">confirm.jsp</result>
+            <result name="error">userReject.jsp</result>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailTo">sgwadmin@garr.it</param>
+        </action>
+        
+        <action name="ReactivateUser" class="it.infn.ct.security.actions.ReactivateUser">
+            <result name="success">/success.jsp</result>
+            <result name="error">/generalError.jsp</result>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailTo">sgwadmin@garr.it</param>
+            <param name="MailSubject">User activation request in the Identity Provider IDPOPEN</param>
+            <param name="MailBody">
+The following user has requested to activate the account again.
+
+    _USER_
+                                
+The IDPOPEN GARR Administrators
+                </param>
+        </action>
+
+        <action name="addUser" class="it.infn.ct.security.actions.AddUser">
+            <result name="input">/register.jsp</result>
+            <result name="success">/success.jsp</result>
+            <param name="IdPAdmin">IDPOPEN Administrator</param>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailCC">sgwadmin@garr.it</param>
+            <param name="MailSubject">Confirmation Request for the registration to the Identity Provider IDPOPEN</param>
+            <param name="MailBody">
+Dear _USER_,
+                                                 
+we have received your request to become a user 
+of the IDPOPEN GARR "catch-all" Identity Provider.
+                                                 
+If you actually did it, please click the following url 
+to confirm your data in the next 48 hours.
+
+_URL_
+
+
+Thank you for your interest.
+
+Best regards,
+The IDPOPEN GARR Administrators
+                </param>
+            
+            
+        </action>
+        
+        <action name="globalAdmin" class="it.infn.ct.security.actions.Login" method="adminRequest">
+            <result name="success">/admin.jsp</result>
+            <result name="error">/userAdmin.jsp</result>
+        </action>
+        <action name="login" class="it.infn.ct.security.actions.Login">
+            <result name="input">/login.jsp</result>
+            <result name="adminAccess">/admin.jsp</result>
+            <result name="userAccess">/userAdmin.jsp</result>
+            <result name="login">/login.jsp</result>
+        </action> 
+        <action name="AdminAction" class="it.infn.ct.security.actions.AdminAction">
+            <result>
+                /table.jsp
+            </result>
+        </action> 
+        <action name="OrgAction" class="it.infn.ct.security.actions.OrgAction">
+            <result>
+                /organizations.jsp
+            </result>
+        </action> 
+        <action name="CaptchaAction" class="it.infn.ct.security.actions.CaptchaAction">
+        </action> 
+        <action name="Logout" class="it.infn.ct.security.actions.Logout">
+            <result name="success">/login.jsp</result>
+        </action>
+        
+        <action name="ExtendAccount" class="it.infn.ct.security.actions.ExtendAccount">
+            <result name="success">/success.jsp</result>
+            <param name="IdPAdmin">IDPOPEN Administrator</param>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailTo">sgwadmin@garr.it</param>
+            <param name="MailSubject">User account extended in Identity Provider IDPOPEN</param>
+            <param name="MailBody">
+The _USER_ has extended the account for another year.
+                
+The IDPOPEN GARR Administrators
+                </param>
+        </action>
+        
+        <action name="ActivateAccount" class="it.infn.ct.security.actions.ActivateAccount">
+            <result name="success">/admin.jsp</result>
+            <param name="IdPAdmin">IDPOPEN Administrator</param>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailBCC">sgwadmin@garr.it</param>
+            <param name="MailSubject">Activation account request for Identity Provider IDPOPEN</param>
+            <param name="MailBody">
+Dear _USER_,
+                                                 
+your request to re-activate your account has been _RESULT_.
+                
+Best regards,
+The IDPOPEN GARR Administrators
+                </param>
+        </action>
+        
+        <action name="DeleteAction" class="it.infn.ct.security.actions.DeleteAction">
+            <result name="success">/admin.jsp</result>
+        </action>
+        
+        <action name="ValidateRegisterUserData" class="it.infn.ct.security.actions.ValidateUser">
+            <result>/validatereg.jsp</result>
+        </action> 
+        <action name="RegisterUser" class="it.infn.ct.security.actions.RegisterUser">
+            <result name="success">/registration.jsp</result>
+            <result name="error">/registrationError.jsp</result>
+            <result name="input">/validatereg.jsp</result>
+            <param name="IdPAdmin">IDPOPEN Administrator</param>
+            <param name="MailFrom">sgwadmin@garr.it</param>
+            <param name="MailCC">sgwadmin@garr.it</param>
+            <param name="MailSubject">Confirmation Request for the registration to the Identity Provider IDPOPEN</param>
+            <param name="MailBody">
+Dear _USER_,
+                                                 
+your request to become a user of the IDPOPEN GARR "catch-all" Identity Provider
+has been accepted.
+
+From now on, and for the next twelve months, you are able to access all the Services
+member of GrIDP "catch-all" Identity Federation.
+                
+A list of services is available at the following link:
+
+https://gridp.garr.it/service-providers.html
+
+When you sign-in in any of them, please select GrIDP as Identity Federation
+and IDPOPEN GARR as Identity Provider. 
+                
+Before your membership will expire you will be contacted by e-mail to extend it.
+
+                
+Best regards,
+The IDPOPEN GARR Administrators
+                </param>
+            
+
+        </action> 
+       <action name="ModifyUser" class="it.infn.ct.security.actions.ModifyUser">
+            <result name="success">/changesUpdate.jsp</result>
+            <result name="error">/changesUpdateError.jsp</result>
+            <result name="input">/userAdmin.jsp</result>
+        </action>
+    </package>
+    
+</struts>

@@ -1,0 +1,18 @@
+<%@ page pageEncoding="UTF-8" %>
+ 
+                    </div>
+            </div>
+            <div class="footer">
+                <span style="float:right; padding:5px;">
+                 <img src="img/logo_.png" alt="logo infn">
+                </span>
+                <span style="float:right; padding:5px;">
+                    <img src="img/cometa.png" alt="logo cometa">
+                </span>
+                <span style="float:right; padding: 0px 5px 5px 5px;">
+                    <img src="img/garr.gif" alt="logo garr">
+                </span>
+                </div>
+        </div>
+    </body>
+</html>
