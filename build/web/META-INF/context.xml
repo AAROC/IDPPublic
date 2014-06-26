@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/">
-    <Resource auth="Container" 
-        mail.smtp.host="smtp.google.com" 
-        name="mail/Users" 
-        type="javax.mail.Session"/>
-</Context>
