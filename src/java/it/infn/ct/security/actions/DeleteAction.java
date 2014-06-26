@@ -1,29 +1,17 @@
 package it.infn.ct.security.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
-<<<<<<< HEAD
-import it.infn.ct.security.entities.UserRequest;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-=======
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
->>>>>>> 45af0525f6756d510118cd1e6341e390b2e46f29
 
 public class DeleteAction extends ActionSupport{
     private String id;
     
     @Override
     public String execute() throws Exception {
-<<<<<<< HEAD
-        SessionFactory factory =new Configuration().configure().buildSessionFactory();
-=======
         SessionFactory factory = (SessionFactory) ServletActionContext.getServletContext().getAttribute("IDPPublic.hibernatefactory");
->>>>>>> 45af0525f6756d510118cd1e6341e390b2e46f29
         Session session = factory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("DELETE FROM UserRequest u WHERE u.id = :id");

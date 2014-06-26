@@ -21,11 +21,8 @@ public class OrgAction extends ActionSupport {
 
     private List<Organization> OrgList = new ArrayList();
     private Log log = LogFactory.getLog(OrgAction.class);
-<<<<<<< HEAD
-=======
     
     private String country;
->>>>>>> 45af0525f6756d510118cd1e6341e390b2e46f29
 
     public List getOrgList() {
         return OrgList;
@@ -34,8 +31,6 @@ public class OrgAction extends ActionSupport {
 
     public OrgAction() {
         OrgList = LDAPUtils.getOrgList();
-<<<<<<< HEAD
-=======
         if(country!=null && !country.isEmpty()){
             for(Organization o: OrgList){
                 if(!o.getCountryCode().equals(country)){
@@ -43,7 +38,6 @@ public class OrgAction extends ActionSupport {
                 }
             }
         }
->>>>>>> 45af0525f6756d510118cd1e6341e390b2e46f29
     }
 
     @Override
@@ -54,8 +48,6 @@ public class OrgAction extends ActionSupport {
     public String display() {
         return NONE;
     }
-<<<<<<< HEAD
-=======
 
     public String getCountry() {
         return country;
@@ -66,5 +58,4 @@ public class OrgAction extends ActionSupport {
     }
     
     
->>>>>>> 45af0525f6756d510118cd1e6341e390b2e46f29
 }

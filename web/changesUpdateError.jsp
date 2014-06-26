@@ -4,14 +4,11 @@
     Author     : Marco Fargetta <marco.fargetta@ct.infn.it>
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@include file="WEB-INF/jspf/header.jspf" %>
+
+
+<h2>I am sorry!!!</h2>
+Your information cannot be updated becasue of a system error.
+
+<%@include file="WEB-INF/jspf/footer.jspf" %>
