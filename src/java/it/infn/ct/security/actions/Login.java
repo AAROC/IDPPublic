@@ -2,15 +2,23 @@ package it.infn.ct.security.actions;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import it.infn.ct.security.entities.UserConfirmUpdate;
 import it.infn.ct.security.utilities.LDAPUser;
 import it.infn.ct.security.utilities.LDAPUtils;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import org.apache.struts2.ServletActionContext;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 public class Login extends ActionSupport  {
     private String username;
     private String password;
     private String login;
     private LDAPUser user;
+    private boolean expiring;
     
     @Override
     public String execute() throws Exception {
@@ -29,10 +37,7 @@ public class Login extends ActionSupport  {
         Map session = ActionContext.getContext().getSession();
         session.put("login","true");
         session.put("ldapUser", user);
-        if(user.isAdministrator())            
-            return "adminAccess";
-        else
-            return "userAccess";
+        return "userAccess";
     }
     
     @Override
@@ -52,6 +57,16 @@ public class Login extends ActionSupport  {
                 addFieldError("password","Or Password is wrong");
             }
         }
+    }
+    
+    public String adminRequest() throws Exception {
+        LDAPUser user = (LDAPUser) ActionContext.getContext().getSession().get("ldapUser");
+        if(user.isAdministrator()){
+            return SUCCESS;
+        }
+        
+        return ERROR;
+        
     }
 
     public String getPassword() {
@@ -86,6 +101,28 @@ public class Login extends ActionSupport  {
     public void setUser(LDAPUser user) {
         this.user = user;
     }
-    
-    
+
+    public boolean isExpiring() {
+        if(user==null){
+            return false;
+        }
+        
+        SessionFactory factory = (SessionFactory) ServletActionContext.getServletContext().getAttribute("IDPPublic.hibernatefactory");
+        Session session = factory.openSession();
+        List<UserConfirmUpdate> update= session.createCriteria(UserConfirmUpdate.class)
+                .add(Restrictions.eq("username", user.getUsername()))
+                .add(Restrictions.eq("updated", Boolean.FALSE))
+                .add(Restrictions.gt("timelimit", new Date()))
+                .list();
+        session.close();
+        if(update!=null && !update.isEmpty()){
+            return true;
+        }
+        
+        return false;
+    }
+
+    public void setExpiring(boolean expiring) {
+        this.expiring = expiring;
+    }
 }

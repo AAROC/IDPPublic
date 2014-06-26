@@ -14,6 +14,10 @@
         <description>ServletContextListener</description>
         <listener-class>it.infn.ct.security.listeners.HibernateListener</listener-class>
     </listener>
+    <listener>
+        <description>Run a periodic check of user registration in order to stop users not anymore interested or moving in other organisations</description>
+        <listener-class>it.infn.ct.security.listeners.CleanerListener</listener-class>
+    </listener>
     <session-config>
         <session-timeout>
             30
@@ -22,6 +26,7 @@
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
+<!--
     <security-constraint>
         <display-name>General</display-name>
         <web-resource-collection>
@@ -34,7 +39,8 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <resource-ref>
+-->
+        <resource-ref>
         <description>Configurazione mail per notifica utenti</description>
         <res-ref-name>mail/Users</res-ref-name>
         <res-type>javax.mail.Session</res-type>

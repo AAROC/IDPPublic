@@ -8,16 +8,27 @@ public class Organization implements Serializable {
     private String country;
     private String countryCode;
     private String description;
-    private Long id;
+    private String reference;
+    private String dn;
 
     public Organization() {
     }
 
-    public Organization(String key, String country, String countryCode, String description) {
-        this.key = key;
-        this.description = description;
-        this.country = country;
-        this.countryCode = countryCode;
+    public Organization(String key, String country, String countryCode, String description, String dn) {
+        this.key= key;
+        this.description= description;
+        this.country= country;
+        this.countryCode= countryCode;
+        this.dn= dn;
+
+    }
+    public Organization(String key, String country, String countryCode, String description, String dn, String reference) {
+        this.key= key;
+        this.description= description;
+        this.country= country;
+        this.countryCode= countryCode;
+        this.dn= dn;
+        this.reference= reference;
 
     }
 
@@ -53,20 +64,23 @@ public class Organization implements Serializable {
         this.countryCode = countryCode;
     }
 
-    public Long getId() {
-        return id;
+    public String getDn() {
+        return dn;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDn(String dn) {
+        this.dn = dn;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getReference() {
+        return reference;
     }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    
 
     @Override
     public boolean equals(Object object) {
@@ -74,14 +88,14 @@ public class Organization implements Serializable {
             return false;
         }
         Organization other = (Organization) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
+        if (this.key.equals(other.key)  && this.countryCode.equals(other.countryCode)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public String toString() {
-        return "it.infn.ct.security.entities.Organization[ id=" + id + " ]";
+        return "it.infn.ct.security.entities.Organization[ key=" + key + " ]";
     }
 }

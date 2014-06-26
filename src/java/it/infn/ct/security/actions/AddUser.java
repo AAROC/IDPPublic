@@ -2,6 +2,7 @@ package it.infn.ct.security.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.config.entities.Parameterizable;
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import it.infn.ct.security.entities.UserRequest;
 import it.infn.ct.security.utilities.LDAPUtils;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +22,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 public class AddUser extends ActionSupport  implements Parameterizable, ServletRequestAware{
     Log log = LogFactory.getLog(AddUser.class);
@@ -79,8 +81,11 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
             addFieldError("username","Username field is empty");
         }
         else{
-            if(LDAPUtils.isCNregistered(username))
-                addFieldError("username","Username already assigned");
+            if(!username.matches("^[0-9a-zA-Z]*$"))
+                addFieldError("username","Username format invalid");
+            else
+                if(LDAPUtils.isCNregistered(username))
+                    addFieldError("username","Username already assigned");
         }
         
         if(givenname.length() < 1){
@@ -94,7 +99,7 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
         if(country==null || country.equals("-1")){
             addFieldError("country","Select your country");
         }
-        if(organization==null || organization.equals("-1")){
+        if(organization==null || organization.equals("-1") || (organization.equals("Other:") && (orgname==null || orgname.isEmpty()))){
             addFieldError("organization","Select your organization");
         }
         try{
@@ -105,8 +110,8 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
         catch(Exception e){
             addFieldError("captcha", "Wrong Captcha");
         }
-        if(password.length() < 1){
-            addFieldError("password","Password field is empty");
+        if(password.length() < 8){
+            addFieldError("password","Minimum password length is 8 characters");
         }
         if(!password.equals(password2)){
            addFieldError("password2","Passwords are different");
@@ -119,9 +124,25 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
                 addFieldError("registeredMail","Email addresses contain spaces");
             }
             else{
-                if(LDAPUtils.isMailUsed(registeredMail)){
-                    addFieldError("registeredMail","Email already registered");                
+                if(LDAPUtils.isMailUsed(registeredMail)){   
+                    addFieldError("registeredMail","Email already registered");
                 }
+                SessionFactory factory = (SessionFactory) ServletActionContext.getServletContext().getAttribute("IDPPublic.hibernatefactory");
+                Session session = factory.openSession();
+                session.beginTransaction();
+                if(!session.createCriteria(UserRequest.class)
+                        .add(Restrictions.eq("preferredMail", registeredMail))
+                        .add(Restrictions.eq("valid", Boolean.TRUE))
+                        .list()
+                        .isEmpty()
+                        ){
+                    
+                    addFieldError("registeredMail","A pending request already issued with this Email");
+                }
+                session.getTransaction().commit();
+                session.close();
+
+                
             }
         }
 
@@ -180,6 +201,7 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
         return registeredMail;
     }
 
+    @EmailValidator(message = "Valid email is requested")
     public void setRegisteredMail(String registeredMail) {
         this.registeredMail = registeredMail;
     }
@@ -348,7 +370,7 @@ public class AddUser extends ActionSupport  implements Parameterizable, ServletR
             
             mailBody = mailBody.replaceAll(
                     "_URL_",
-                    "http://"+httpServReq.getServerName()+"/confirmRegistration.action?uid="+usreq.getUserHash());
+                    "https://"+httpServReq.getServerName()+"/confirmRegistration.action?uid="+usreq.getUserHash());
             
             mailMsg.setText(mailBody);
             

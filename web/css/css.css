@@ -24,7 +24,7 @@ a, a:link, a:link, a:link, a:hover {
 }
 #back {
     background-color: #FFFFFF;
-    width: 1000px;
+    width: 900px;
     margin:auto;
 }
 
@@ -32,7 +32,7 @@ a, a:link, a:link, a:link, a:hover {
     background-color:efefef;
     margin: auto;
     text-align: left;
-    width: 1000px;
+    width: 900px;
     border-radius: 4px 4px 4px 4px;
     border-left:1px solid  #F0F0F0;
     border-right:1px solid  #F0F0F0;
@@ -67,9 +67,16 @@ h1 {
 }
 
 h2 {
-    font-size: 110%;
+    font-size: 1.5em;
 }
 
+h3 {
+    letter-spacing: -1px;
+    font-family: arial,verdana,sans-serif;
+    margin: 0  0 .3em;
+    color: #000;
+    padding-bottom: .1em;    
+}
 
 h1 a {
     text-decoration: none;
@@ -86,7 +93,7 @@ h1 a:hover {
 }
 div.nav {
     display: table;
-    width:1000px;
+    width:900px;
 
 }
 
@@ -105,7 +112,7 @@ div.nav ul {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cacaca', endColorstr='#848484');
     display: inline-block;
     list-style: none;
-    width:1000px;
+    width:900px;
 }
 
 div.nav ul li {
@@ -212,6 +219,59 @@ div.nav ul li.selected a {
 }
 div.nav ul li.selected:last-child a {
     padding-right: 34px;
+}
+
+/*---MARCO---*/
+div.col-60 {
+    width: 55%;
+    float: left;
+}
+div.col-40 {
+    width: 35%;
+    float:left;
+}
+
+div > img {
+    padding: 10px;
+    margin: 10px;
+}
+
+div.centralImgContainer {
+    width: 100%;
+    text-align: center; 
+    display:inline-block;
+}
+
+h2.problem {
+    
+    letter-spacing: -1px;
+    font-family: arial,verdana,sans-serif;
+    margin: 0  0 .3em;
+    color: tomato;
+    padding-bottom: .1em;
+
+    font-size: 28px;
+    margin-top: 30px;
+    border-bottom:  tomato solid;
+    font-weight: bolder;
+
+    text-align: center;
+}
+
+.important{
+    font-weight: bolder;
+    color: tomato;
+}
+
+h4 {
+    margin: 15px 5px;
+    font-size: calc;
+}
+
+h4 a:link, h4 a:hover, h4 a:active, h4 a:visited, h4 a:visited:hover {
+    color: #2c74b2;
+    font-style: italic;
+    font-weight: bold;
 }
 
 /*-----*/
@@ -337,7 +397,8 @@ div.nav ul li.search:active a {
     font-weight:bold;
 }
 #slider {
-    height:160px;
+    margin-left:70px;
+    height:270px;
     background:url(../images/loading.gif) no-repeat 50% 50%;
 }
 #slider img {
@@ -484,16 +545,16 @@ select:focus        {
 }
 
 
-#gradient-style
+.gradient-style
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
-	margin: 45px;
-	width: 480px;
+	margin: 15px 45px 45px 45px;
+	width: 810px;
 	text-align: left;
 	border-collapse: collapse;
 }
-#gradient-style th
+.gradient-style th
 {
 	font-size: 13px;
 	font-weight: normal;
@@ -503,7 +564,7 @@ select:focus        {
 	border-bottom: 1px solid #fff;
 	color: #039;
 }
-#gradient-style td
+.gradient-style td
 {
 	padding: 8px; 
 	border-bottom: 1px solid #fff;
@@ -511,13 +572,13 @@ select:focus        {
 	border-top: 1px solid #fff;
 	background: #e8edff url('table-images/gradback.png') repeat-x;
 }
-#gradient-style tfoot tr td
+.gradient-style tfoot tr td
 {
 	background: #e8edff;
 	font-size: 12px;
 	color: #99c;
 }
-#gradient-style tbody tr:hover td
+.gradient-style tbody tr:hover td
 {
 	background: #d0dafd url('table-images/gradhover.png') repeat-x;
 	color: #339;

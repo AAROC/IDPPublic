@@ -16,6 +16,12 @@
             $("#register").submit();
             return false;
         }
+        function activateRow(id, action){
+            $("#request_id").val(id);
+            $("#action").val(action);
+            $("#activate").submit();
+            return false;
+        }
     </script>
     <div style="float: right;">
         <a href="<%= request.getContextPath() %>/Logout.action" ><img src="img/Log-Out-icon.png" alt="" width="24" height="24">Logout</a>
@@ -28,4 +34,11 @@
     <s:form action="DeleteAction.action" id="delete" >
         <s:hidden name="id" id="hidden_id" />
     </s:form>
+    
+    <s:form action="ActivateAccount.action" id="activate" >
+        <s:hidden name="id" id="request_id" />
+        <s:hidden name="action" id="action" />
+    </s:form>
+    
+    
 <%@include file="WEB-INF/jspf/footer.jspf" %>

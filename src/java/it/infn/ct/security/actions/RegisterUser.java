@@ -27,8 +27,10 @@ import com.opensymphony.xwork2.config.entities.Parameterizable;
 import it.infn.ct.security.entities.UserRequest;
 import it.infn.ct.security.utilities.LDAPUser;
 import it.infn.ct.security.utilities.LDAPUtils;
+import it.infn.ct.security.utilities.Organization;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -53,6 +55,11 @@ public class RegisterUser extends ActionSupport implements Parameterizable{
     private String user_id;
     private String organizationDN;
     private String organizationUnitDN;
+    private String orgname;
+    private String orgdesc;
+    private String orgref;
+    private Map<String, String> orgs;
+    private UserRequest userReq;
     
     private Map<String, String> actionParams;
     private String mailFrom;
@@ -64,11 +71,24 @@ public class RegisterUser extends ActionSupport implements Parameterizable{
     
     @Override
     public String execute() throws Exception {
-        UserRequest userReq;
         SessionFactory factory = (SessionFactory) ServletActionContext.getServletContext().getAttribute("IDPPublic.hibernatefactory");
         Session session = factory.openSession();
-        userReq = (UserRequest) session.get(UserRequest.class, Long.parseLong(user_id));
-        if(LDAPUtils.registerUser( (LDAPUser) ActionContext.getContext().getSession().get("ldapUser"), userReq, organizationDN, organizationUnitDN)){
+        if(userReq==null){
+            userReq = (UserRequest) session.get(UserRequest.class, Long.parseLong(user_id));
+        }
+        
+        String userOrg;
+        if(organizationDN.equals("newOrg")){
+            
+            LDAPUtils.addOrganisation( (LDAPUser) ActionContext.getContext().getSession().get("ldapUser"), new Organization(orgname, null, userReq.getCountry(), orgdesc, NONE, orgref));
+            
+            userOrg= LDAPUtils.getOrgDN(orgname, userReq.getCountry());
+        }
+        else{
+            userOrg= organizationDN;
+        }
+        
+        if(LDAPUtils.registerUser( (LDAPUser) ActionContext.getContext().getSession().get("ldapUser"), userReq, userOrg, organizationUnitDN)){
             session.beginTransaction();
             Query query = session.createQuery("DELETE FROM UserRequest u WHERE u.id = :id");
             query.setString("id",user_id);
@@ -76,13 +96,36 @@ public class RegisterUser extends ActionSupport implements Parameterizable{
             session.getTransaction().commit();
             session.close();
             sendMail(userReq);
-            return super.execute();
+            return SUCCESS;
         }
         
         session.close();
         return ERROR;
     }
 
+    @Override
+    public void validate() {
+        if(userReq==null){
+            SessionFactory factory = (SessionFactory) ServletActionContext.getServletContext().getAttribute("IDPPublic.hibernatefactory");
+            Session session = factory.openSession();
+            userReq = (UserRequest) session.get(UserRequest.class, Long.parseLong(user_id));
+            session.close();
+        }
+        if(organizationDN.equals("newOrg")){
+            String orgDN= LDAPUtils.getOrgDN(orgname, userReq.getCountry());
+            if(orgDN!=null && !orgDN.isEmpty()){
+                addFieldError("orgname", "An organisation with this name is already registered");
+                userReq.setOrganizationDN(LDAPUtils.getOrgDN(userReq.getOrganization(), userReq.getCountry()));
+                orgs= new LinkedHashMap<String, String>();
+
+                for(Organization o: LDAPUtils.getOrgList(userReq.getCountry())){
+                    orgs.put(o.getDn(), o.getKey()+" - "+o.getDescription());
+                }
+
+            }
+        }
+    }
+    
     public String getOrganizationDN() {
         return organizationDN;
     }
@@ -105,6 +148,38 @@ public class RegisterUser extends ActionSupport implements Parameterizable{
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getOrgname() {
+        return orgname;
+    }
+
+    public void setOrgname(String orgname) {
+        this.orgname = orgname;
+    }
+
+    public String getOrgdesc() {
+        return orgdesc;
+    }
+
+    public void setOrgdesc(String orgdesc) {
+        this.orgdesc = orgdesc;
+    }
+
+    public String getOrgref() {
+        return orgref;
+    }
+
+    public void setOrgref(String orgref) {
+        this.orgref = orgref;
+    }
+
+    public Map<String, String> getOrgs() {
+        return orgs;
+    }
+
+    public void setOrgs(Map<String, String> orgs) {
+        this.orgs = orgs;
     }
     
     private void sendMail(UserRequest usreq) throws MailException{

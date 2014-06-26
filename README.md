@@ -1,11 +1,7 @@
-SAGridIdP
+IDPPublic
 =========
 
-Code for the web interface to the Catch-All IdP of South Africa. 
-
-This package has been slightly modified from source provided by Marco Fargetta (marco.fargetta@ct.infn.it) who may be contacted for any further details regarding the design of the project. It has been originally developed for the GARR IdPOpen, and in this context is being extended for the ei4Africa project to support the various African IdPs being developed.
-
-The package is developed using Struts with Netbeans. These libraries are necessary to compile the code and are distributed with this project. 
+Code for the front-end page of an home-less IDP storing identities in LDAP
 
 Overview of functionality
 =========================
@@ -17,22 +13,24 @@ There is a predefined workflow for accepting new users:
   3. The request confirmation is sent to the IdP administrator
   4. The IdP administrator logs into the IdP and is presented with a table of requests describing the pending requests and a button to approve or deny the requests
   5. Once a request is denied or accepted, a final email is sent to the user; If a user is accepted, the identity is automatically inserted into the LDAP backend (provided this has been correctly configured)
+  6. Every year the IdP will send an e-mail to the user asking to extend the account for another year. If the user extend the account it can be used otherwise the account is suspended. The user can ask to enable the account again but this requires the administrator to accept the request
 
 Customisation
 =============
 
 This code has been modified from the IdPOpen project. In order to customise it for your IdP, you need to take into account a couple of technical details regarding the ldap directory backend, tomcat configuration and firewall, apart from the changes to the jsp pages and images.
 
-  1. ldap.properties : the ldap.properties file is necessary to configure the communication with the LDAP directory backend which contains the identities of the IdP. You should configure this file according to your particular directory location, structure and permissions. 
-  2. hibernate.cfg.xml: edit the path to the hibernate persistent storage :  
+  1. ldap.properties: the ldap.properties file is necessary to configure the communication with the LDAP directory backend which contains the identities of the IdP. You should configure this file according to your particular directory location, structure and permissions. 
+  2. cleaner.properties: the cleaner.properties file contain the information about when and how notify the users for the account expiration
+  3. hibernate.cfg.xml: edit the path to the hibernate persistent storage :  
 ```xml 
   <property name="hibernate.connection.url">jdbc:hsqldb:file:/tmp/test/</property>
 ``` 
-  3. struts.xml : this file contains the confguration of the controller part of the MVC application. Edit it to reflect your particular taste, with relevant information regarding the contact details, etc. 
-  4. context.xml : put your mail server into the relevant section
-  5. web / img : put your institute's logo and other artwork you would like into this directory
-  6. web / WEB-INF : edit header.jspf and footer.jspf accordingly 
-  7. various content in jsp files: you can edit the jsp files in web / according to your taste.
+  4. struts.xml: this file contains the confguration of the controller part of the MVC application. Edit it to reflect your particular taste, with relevant information regarding the contact details, etc. 
+  5. context.xml: put your mail server into the relevant section
+  6. web / img: put your institute's logo and other artwork you would like into this directory
+  7. web / WEB-INF: edit header.jspf and footer.jspf accordingly 
+  8. various content in jsp files: you can edit the jsp files in web / according to your taste.
 
 Compilation
 ===========
@@ -43,6 +41,6 @@ By importing the project into Netbeans, you can compile the project, which will 
 Tomcat configuration
 ====================
 
-The applications is designed to run under the tomcat6 webserver. 
+The applications is designed to run under the tomcat6 webserver. Be sure to have the mail.jar in the common classpath in order to make the mail working
 #TODO
 

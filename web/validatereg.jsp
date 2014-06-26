@@ -7,13 +7,12 @@
 
 <%@include file="WEB-INF/jspf/header.jspf" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+
+
 <h2>Verify and Confirm User Record</h2>
     <s:if test="#session.login != 'true'">
         <jsp:forward page="login.jsp" />  
     </s:if>
-    <div style="float: right;">
-        <a href="<%= request.getContextPath() %>/Logout.action" ><img src="img/Log-Out-icon.png" alt="" width="24" height="24">Logout</a>
-    </div>
 
         <h3>Confirm registration for the user: <i><s:property value="userReq.givenname"/> <s:property value="userReq.surname"/></i></h3>
         
@@ -23,12 +22,40 @@
                 <s:label label="Username" value="%{userReq.username}"/>
                 <s:label label="PreferredMail" value="%{userReq.preferredMail}"/>
                 <s:label label="AdditionalMails" value="%{userReq.additionalMails}"/>
-                
-                <s:textfield label="Organisation" name="organizationDN" value="%{userReq.organizationDN}" size="30"/><br/>
+                <s:if test="%{userReq.organizationDN != null}">
+                    <s:textfield label="Organisation" name="organizationDN" value="%{userReq.organizationDN}" size="30" readonly="true" /><br/>
+                </s:if>
+                <s:else>
+                    <s:label label="Organisation specified" value="%{userReq.organization+' ('+userReq.description+')'}"/>
+
+                    <s:select name="organizationDN" id="organisation" label="Organisation" list="orgs" headerKey="newOrg" headerValue="Add a new Organisation"/>
+                    
+                    <div id="newOrg">
+                        <s:textfield label="Organisation name" key="orgname"  />
+                        <s:textfield label="Organisation description" key="orgdesc" />
+                        <s:textfield label="Organisation reference (url)" key="orgref" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#organisation").change(function(e){
+                            var value= $("#organisation").val();
+                            if(value!="newOrg"){
+                                $("#RegisterUser_orgname").attr('disabled', true);
+                                $("#RegisterUser_orgdesc").attr('disabled', true);
+                                $("#RegisterUser_orgref").attr('disabled', true);
+                            }
+                            else{
+                                $("#RegisterUser_orgname").attr('disabled', false);
+                                $("#RegisterUser_orgdesc").attr('disabled', false);
+                                $("#RegisterUser_orgref").attr('disabled', false);
+                            }
+                        });
+                    </script>            
+
+                </s:else>
                 <s:textfield label="Organisation Unit" name="organizationUnitDN" value="%{userReq.organizationUnitDN}" size="30"/><br/>
                 <s:submit name="confirm" value="Confirm"/>
             </s:form>
-            <s:form action="login.action" method="POST">
+            <s:form action="globalAdmin" method="POST">
                 <s:submit name="back" value="Back"/>
             </s:form>
         

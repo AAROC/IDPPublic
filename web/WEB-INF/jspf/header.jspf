@@ -24,8 +24,20 @@
                     <li><a href="home">Home</a></li>
                     <li><a href="providers">Service Providers</a></li>
                     <li><a href="about">About</a></li>
+                    <li><a href="providers">Service Providers</a></li>
+                    <li><a href="documentation">Documentation </a></li>
                     <li><a href="register">Register</a></li>
-                    <li style="float: center"><a href="login">Login</a></li>
+                    <li style="float: right">
+                        <div style="float: right;">
+                            <s:if test="#session.login != 'true'">
+                                <a href="login">Log-in</a>
+                            </s:if>
+                            <s:if test="#session.login == 'true'">
+                                <a href="<%= request.getContextPath() %>/Logout.action" >Logout</a>
+                            </s:if>
+    </div>
+
+                    </li>
 
 
                 </ul>

@@ -6,6 +6,10 @@
 
 <%@include file="WEB-INF/jspf/header.jspf" %>
 
-Registrato
+<h2>Registered!!!</h2>
+
+<s:form action="login.action" method="POST">
+    <s:submit name="back" value="Back"/>
+</s:form>
 
 <%@include file="WEB-INF/jspf/footer.jspf" %>

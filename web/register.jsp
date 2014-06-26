@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@include file="WEB-INF/jspf/header.jspf" %>
                     <h2>Register</h2>
-Please note this IdP is used for authentication for real services (science gateways, web portals, etc). Therefore, in order to use the Catch-All Identity Federation, we need your real name, surname and email address, as well as phone number. These will be checked by a human being after your registration request has been sent.
+
 <script type="text/javascript">
 (function( $ ){
 	$.fn.captcha = function(options){
@@ -105,7 +105,7 @@ var orgs=new Array();
                         <p>
                             <h2>Personal information</h2>
                         </p>
-                                        
+                </td></tr>
                 <s:textfield label="Given Name" name="givenname" maxLength="50" required="true" />
                 <s:textfield label="Family Name" name="surname" maxLength="50" required="true" />
                 <s:textfield label="Title" name="title" maxLength="50" />
@@ -121,7 +121,7 @@ var orgs=new Array();
                     <td>
                         <select onchange="fillOrgs()" name="country" id="country">
                             <option value="-1" selected="selected">Select Country</option> 
-                            <option value="AX">Åland Islands</option>
+                            <option value="AX">Ã…land Islands</option>
                             <option value="AF">Afghanistan</option>
                             <option value="AL">Albania</option>
                             <option value="DZ">Algeria</option>
@@ -177,10 +177,10 @@ var orgs=new Array();
                             <option value="CR">Costa Rica</option>
                             <option value="HR">Croatia</option>
                             <option value="CU">Cuba</option>
-                            <option value="CW">Curaçao</option>
+                            <option value="CW">CuraÃ§ao</option>
                             <option value="CY">Cyprus</option>
                             <option value="CZ">Czech Republic</option>
-                            <option value="CI">Côte D'Ivoire</option>
+                            <option value="CI">CÃ´te D'Ivoire</option>
                             <option value="DK">Denmark</option>
                             <option value="DJ">Djibouti</option>
                             <option value="DM">Dominica</option>
@@ -305,8 +305,8 @@ var orgs=new Array();
                             <option value="RO">Romania</option>
                             <option value="RU">Russian Federation</option>
                             <option value="RW">Rwanda</option>
-                            <option value="RE">Réunion</option>
-                            <option value="BL">Saint Barthélemy</option>
+                            <option value="RE">RÃ©union</option>
+                            <option value="BL">Saint BarthÃ©lemy</option>
                             <option value="SH">Saint Helena, Ascension and Tristan Da Cunha</option>
                             <option value="KN">Saint Kitts And Nevis</option>
                             <option value="LC">Saint Lucia</option>
@@ -410,7 +410,7 @@ var orgs=new Array();
                 </tr>
                 <s:textfield label="Email Address" name="registeredMail" maxLength="128" required="true" />
                 <s:textfield label="Additional Email Addresses" tooltip="Separate the addresses with a , or ;" name="otherMails" maxLength="512" />
-                
+                <tr><td><br /></td></tr>
                 <tr><td><p><h2>Validation</h2></p></td></tr>
                 <tr><td><br /></td></tr>
                 <tr errorFor="captcha"><td><span class="errorMessage"><s:if test="fieldErrors.get('captcha').size() > 0">
@@ -422,7 +422,5 @@ var orgs=new Array();
             </s:form>
 
              <p><h2>Note</h2><p>
-             Please note that once your request has been submitted, you will receive an email asking for confirmation. <b>Without clicking on the link in the mail, we cannot proceed with your request</b>, so if the mail doesn't arrive in a few minutes, please contact the <a mailto:bbecker@csir.co.za>service admin</a>.
-             
              <p><i>If you would change your password or other information please log-in to the IdP service following the <b>Account</b> link on the top right corner </i></p>
 <%@include file="WEB-INF/jspf/footer.jspf" %>

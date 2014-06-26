@@ -23,7 +23,6 @@ package it.infn.ct.security.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import it.infn.ct.security.entities.UserRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import javax.mail.Message;
 import javax.mail.MessagingException;

@@ -24,6 +24,9 @@ package it.infn.ct.security.actions;
 import com.opensymphony.xwork2.ActionSupport;
 import it.infn.ct.security.entities.UserRequest;
 import it.infn.ct.security.utilities.LDAPUtils;
+import it.infn.ct.security.utilities.Organization;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,6 +38,7 @@ import org.hibernate.SessionFactory;
 public class ValidateUser extends ActionSupport{
     private String id;
     private UserRequest userReq;
+    private Map<String, String> orgs;
 
     @Override
     public String execute() throws Exception {
@@ -45,6 +49,11 @@ public class ValidateUser extends ActionSupport{
         session.close();
         
         userReq.setOrganizationDN(LDAPUtils.getOrgDN(userReq.getOrganization(), userReq.getCountry()));
+        orgs= new LinkedHashMap<String, String>();
+        
+        for(Organization o: LDAPUtils.getOrgList(userReq.getCountry())){
+            orgs.put(o.getDn(), o.getKey()+" - "+o.getDescription());
+        }
         
         return SUCCESS;
     }
@@ -63,6 +72,14 @@ public class ValidateUser extends ActionSupport{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Map<String, String> getOrgs() {
+        return orgs;
+    }
+
+    public void setOrgs(Map<String, String> orgs) {
+        this.orgs = orgs;
     }
 
 

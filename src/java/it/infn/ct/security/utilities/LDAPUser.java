@@ -32,7 +32,8 @@ import java.util.ResourceBundle;
 public class LDAPUser extends UserRequest{
  
     private ArrayList<String> groups;
-    private boolean administrator;
+    private boolean administrator=false;
+    private boolean active=false;
 
     public ArrayList<String> getGroups() {
         return groups;
@@ -43,6 +44,8 @@ public class LDAPUser extends UserRequest{
         this.groups = groups;
         if(groups.contains(rb.getString("administratorGroup")))
             administrator=true;
+        if(groups.contains(rb.getString("usersGroup")))
+            active=true;
     }
     
     public void addGroup(String group){
@@ -53,6 +56,8 @@ public class LDAPUser extends UserRequest{
         groups.add(group);
         if(group.equals(rb.getString("administratorGroup")))
             administrator=true;
+        if(group.equals(rb.getString("usersGroup")))
+            active=true;
     }
 
     public boolean isAdministrator() {
@@ -62,7 +67,13 @@ public class LDAPUser extends UserRequest{
     public void setAdministrator(boolean administrator) {
         this.administrator = administrator;
     }
-    
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+ 
 }

@@ -1,7 +1,10 @@
 package it.infn.ct.security.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class UserRequest implements Serializable {
@@ -108,7 +111,7 @@ public class UserRequest implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return title==null? "" : title;
     }
 
     public void setTitle(String title) {
@@ -163,6 +166,24 @@ public class UserRequest implements Serializable {
         this.userHash = userHash;
     }
 
+    public Date getExpireTime() {
+        
+        ResourceBundle rb= ResourceBundle.getBundle("cleaner");
+        int maxCycles= Integer.parseInt(rb.getString("NotifyCycle").split(",")[0]);
+        
+        Calendar today= GregorianCalendar.getInstance();
+        today.add(Calendar.DAY_OF_YEAR, maxCycles);
+        
+        Calendar creation= GregorianCalendar.getInstance();
+        creation.setTime(creationTime);
+        
+        while(creation.before(today)){
+            creation.add(Calendar.YEAR, 1);
+        }
+        
+        return creation.getTime();
+    }
+    
     public Date getCreationTime() {
         return creationTime;
     }
@@ -180,10 +201,7 @@ public class UserRequest implements Serializable {
     }
 
     public String getOrganizationDN() {
-        if(organizationDN!=null && !organizationDN.isEmpty())
-            return organizationDN;
-        else
-            return description+" ("+organization+")";
+        return organizationDN;
     }
 
     public void setOrganizationDN(String organizationDN) {

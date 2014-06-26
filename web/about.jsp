@@ -1,7 +1,7 @@
 <%-- 
     Document   : about
     Created on : 04-Jan-2012, 13:45:36
-    Author     : marco
+    Author     : brucellino
 --%>
 <% pageContext.setAttribute("title", "about"); %>
 
