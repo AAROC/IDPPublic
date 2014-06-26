@@ -1,7 +1,13 @@
 IDPPublic
 =========
 
-Code for the front-end page of an home-less IDP storing identities in LDAP
+Code for the front-end of a Shibboleth Identity Provider, for homeless users. This package includes membership request workflow and annual expiration of membership. 
+
+## Prerequisites
+In order to build this, you will need :
+  1. OpenJDK 
+  1. Tomcat6 application server
+  2. mail.jar in the classpath
 
 Overview of functionality
 =========================
