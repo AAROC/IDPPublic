@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Idppublic : Code for the Catch-All IdP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Idppublic</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/AAROC/IDPPublic">View on GitHub</a>
+
+          <h1 id="project_title">Idppublic</h1>
+          <h2 id="project_tagline">Code for the Catch-All IdP</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/AAROC/IDPPublic/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/AAROC/IDPPublic/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="idppublic" class="anchor" href="#idppublic"><span class="octicon octicon-link"></span></a>IDPPublic</h1>
+
+<p>Code for the front-end of a Shibboleth Identity Provider, for homeless users. This package includes membership request workflow and annual expiration of membership. </p>
+
+<h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<p>In order to build this, you will need :</p>
+
+<ol>
+<li>OpenJDK </li>
+<li>Tomcat6 application server</li>
+<li>mail.jar in the classpath</li>
+</ol><h1>
+<a name="overview-of-functionality" class="anchor" href="#overview-of-functionality"><span class="octicon octicon-link"></span></a>Overview of functionality</h1>
+
+<p>This is a web frontend to the Identity Provider service. The IdP is based on Shibboleth - it is assumed that you already have a working Shibboleth web service running. This frontend is simply an easy way to present a public face to the IdP, but also provide a registration page for potential users. </p>
+
+<p>There is a predefined workflow for accepting new users: </p>
+
+<ol>
+<li>User fills in a form on the registration page</li>
+<li>An email is sent to the user with the email provided, by the service, which prompts the user to confirm their request.</li>
+<li>The request confirmation is sent to the IdP administrator</li>
+<li>The IdP administrator logs into the IdP and is presented with a table of requests describing the pending requests and a button to approve or deny the requests</li>
+<li>Once a request is denied or accepted, a final email is sent to the user; If a user is accepted, the identity is automatically inserted into the LDAP backend (provided this has been correctly configured)</li>
+<li>Every year the IdP will send an e-mail to the user asking to extend the account for another year. If the user extend the account it can be used otherwise the account is suspended. The user can ask to enable the account again but this requires the administrator to accept the request</li>
+</ol><h1>
+<a name="customisation" class="anchor" href="#customisation"><span class="octicon octicon-link"></span></a>Customisation</h1>
+
+<p>This code has been modified from the IdPOpen project. In order to customise it for your IdP, you need to take into account a couple of technical details regarding the ldap directory backend, tomcat configuration and firewall, apart from the changes to the jsp pages and images.</p>
+
+<ol>
+<li>ldap.properties: the ldap.properties file is necessary to configure the communication with the LDAP directory backend which contains the identities of the IdP. You should configure this file according to your particular directory location, structure and permissions. </li>
+<li>cleaner.properties: the cleaner.properties file contain the information about when and how notify the users for the account expiration</li>
+<li>hibernate.cfg.xml: edit the path to the hibernate persistent storage :<br>
+</li>
+</ol><div class="highlight highlight-xml"><pre>  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.connection.url"</span><span class="nt">&gt;</span>jdbc:hsqldb:file:/tmp/test/<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+
+<ol>
+<li>struts.xml: this file contains the confguration of the controller part of the MVC application. Edit it to reflect your particular taste, with relevant information regarding the contact details, etc. </li>
+<li>context.xml: put your mail server into the relevant section</li>
+<li>web / img: put your institute's logo and other artwork you would like into this directory</li>
+<li>web / WEB-INF: edit header.jspf and footer.jspf accordingly </li>
+<li>various content in jsp files: you can edit the jsp files in web / according to your taste.</li>
+</ol><h1>
+<a name="compilation" class="anchor" href="#compilation"><span class="octicon octicon-link"></span></a>Compilation</h1>
+
+<p>By importing the project into Netbeans, you can compile the project, which will generate the war and deploy it. This can be tested on your laptop before deploying the war to the production idp machine - you can check layout, content, design, etc.</p>
+
+<h1>
+<a name="tomcat-configuration" class="anchor" href="#tomcat-configuration"><span class="octicon octicon-link"></span></a>Tomcat configuration</h1>
+
+<p>The applications is designed to run under the tomcat6 webserver. Be sure to have the mail.jar in the common classpath in order to make the mail working</p>
+
+<h1>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h1>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Idppublic maintained by <a href="https://github.com/AAROC">AAROC</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
