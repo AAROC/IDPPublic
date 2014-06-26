@@ -7,7 +7,7 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>
 
 
-<h2>Congratulation!!!</h2>
-Your information has been update.
+<h2>We're good</h2>
+Your information has been updated, thanks. May the force be with you.
 
 <%@include file="WEB-INF/jspf/footer.jspf" %>
