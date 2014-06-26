@@ -33,6 +33,6 @@ limitations under the License.
 <h2>Error!</h2>
 
 An error occur to the system performing the requested action.
-Please, try again in few minutes and if the problem persist send an email to <a href="mailto:sgwadmin@garr.it">credentials-admin@ct.infn.it</a>.
+Please, try again in few minutes and if the problem persist send an email to <a href="mailto:CHANGEME">CHANGEME</a>.
 
 <%@include file="WEB-INF/jspf/footer.jspf" %>
