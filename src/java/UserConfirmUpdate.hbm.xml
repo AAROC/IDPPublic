@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class dynamic-insert="true" dynamic-update="true" mutable="true" name="it.infn.ct.security.entities.UserConfirmUpdate" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="USERUPDATES">
+        <id name="id" type="long" column="ID" >
+            <generator class="native"/>
+        </id>
+        <property name="username" column="USERNAME"/>
+        <property name="timelimit" column="TIMELIMIT"/>
+        <property name="updated" column="UPDATED"/>
+    </class>
+
+  
+
+</hibernate-mapping>
