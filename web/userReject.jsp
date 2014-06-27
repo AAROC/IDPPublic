@@ -4,6 +4,6 @@
 
 Dear user, your registration request has expired or there are other problems.
 
-Please, try to register again and if the problem persist send an email to <a href="mailto:credentials-admin@ct.infn.it">credentials-admin@ct.infn.it</a>.
+Please, try to register again and if the problem persist send an email to <a href="mailto:CHANGEME">the IdP Admin</a>.
 
 <%@include file="WEB-INF/jspf/footer.jspf" %>
