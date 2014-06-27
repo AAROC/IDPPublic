@@ -3,7 +3,7 @@ jdk:
   - openjdk6
   - openjdk7
 before_install:
-  - apt-get install tomcat6
+  - sudo apt-get install tomcat6
 notifications:
   email:
     recipients:
