@@ -5,6 +5,10 @@ jdk:
 before_install:
   - echo $PWD
   - sudo apt-get install tomcat6
+build:
+  - ant build
+install: 
+  - ant deploy
 notifications:
   email:
     recipients:
