@@ -6,7 +6,7 @@ before_install:
   - echo $PWD
   - sudo apt-get install tomcat6
 install: 
-  - ant
+  - ant default
 notifications:
   email:
     recipients:
