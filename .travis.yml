@@ -3,6 +3,7 @@ jdk:
   - openjdk6
   - openjdk7
 before_install:
+  - echo $PWD
   - sudo apt-get install tomcat6
 notifications:
   email:
