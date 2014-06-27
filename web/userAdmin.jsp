@@ -42,9 +42,9 @@
     </s:form>
 
     <p>
-        It is not possible to modify other information. If you move to a different
+        We don't currently provide means to modify other information. If you move to a different
         organisation, please create a new account and let the current account to expire.
-        For more information write to <a href="mailto:sgwadmin@garr.it">sgwadmin@garr.it</a> </p>
+        For more information write to <a href="mailto:CHANGEME">the IdP admins</a> </p>
 </div>
 <div class="col-40">
     <div>
