@@ -4,3 +4,8 @@ jdk:
   - openjdk7
 before_install:
   - apt-get install tomcat6
+notifications:
+  email:
+    recipients:
+      - brucellino@gmail.com
+      - Marco.Fargetta@ct.infn.it
