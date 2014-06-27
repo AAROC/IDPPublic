@@ -1,7 +1,7 @@
 IDPPublic
 =========
 
-Code for the front-end of a Shibboleth Identity Provider, for homeless users. This package includes membership request workflow and annual expiration of membership. 
+This project provides code for the front-end of a Shibboleth Identity Provider. The IdP is particlarly adapted for *homeless* users and includes membership request workflow and annual expiration of membership. 
 
 ## Prerequisites
 In order to build this, you will need :
@@ -26,6 +26,10 @@ Customisation
 
 This code has been modified from the IdPOpen project. In order to customise it for your IdP, you need to take into account a couple of technical details regarding the ldap directory backend, tomcat configuration and firewall, apart from the changes to the jsp pages and images.
 
+The `master` branch is a generic template, which can be customised. We suggest that you fork the master branch into your own repository and create a new branch with your project name : *e.g.* `sagrid`, `gridp`, etc. Stable versions are tagged with version numbers.
+
+There are also a few specific files which need careful attention, to correspond with the LDAP and other local settings of your IdP : 
+
   1. ldap.properties: the ldap.properties file is necessary to configure the communication with the LDAP directory backend which contains the identities of the IdP. You should configure this file according to your particular directory location, structure and permissions. 
   2. cleaner.properties: the cleaner.properties file contain the information about when and how notify the users for the account expiration
   3. hibernate.cfg.xml: edit the path to the hibernate persistent storage :  
@@ -43,10 +47,11 @@ Compilation
 
 By importing the project into Netbeans, you can compile the project, which will generate the war and deploy it. This can be tested on your laptop before deploying the war to the production idp machine - you can check layout, content, design, etc.
 
+[![Travis Build Status](https://travis-ci.org/AAROC/IDPPublic.svg?branch=sagrid-1.1.0rc)](https://travis-ci.org/AAROC/IDPPublic)
+
+This project is continually tested using [Travis](http://travis-ci.org). Clean builds on Travis mean that the master branch will build in principle, but provide no guarantee of the suitability or stablity of the code. 
 
 Tomcat configuration
 ====================
 
 The applications is designed to run under the tomcat6 webserver. Be sure to have the mail.jar in the common classpath in order to make the mail working
-#TODO
-
