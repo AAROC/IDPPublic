@@ -37,5 +37,5 @@ limitations under the License.
                 <a href="<s:url action='forgotpass' namespace="/"/>">Forgot your password?</a>
             </h4>
 
-            <h3><i>Note: to reset your password or for other login problems please write to <a href="mailto:bbecker@csir.co.za">the service admin</a>. </i></h3>
+            <h3><i>Note: to reset your password or for other login problems please write to <a href="mailto:CHANGEME">the service admin</a>. </i></h3>
 <%@include file="WEB-INF/jspf/footer.jspf" %>
