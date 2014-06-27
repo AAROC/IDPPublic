@@ -47,7 +47,7 @@ Compilation
 
 By importing the project into Netbeans, you can compile the project, which will generate the war and deploy it. This can be tested on your laptop before deploying the war to the production idp machine - you can check layout, content, design, etc.
 
-[![Travis Build Status](https://travis-ci.org/AAROC/IDPPublic.svg?branch=sagrid-1.1.0rc)](https://travis-ci.org/AAROC/IDPPublic)
+[![Travis Build Status](https://travis-ci.org/AAROC/IDPPublic.svg?branch=master)](https://travis-ci.org/AAROC/IDPPublic)
 
 This project is continually tested using [Travis](http://travis-ci.org). Clean builds on Travis mean that the master branch will build in principle, but provide no guarantee of the suitability or stablity of the code. 
 
