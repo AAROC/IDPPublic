@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - openjdk6
+  - openjdk7
+before_install:
+  - echo $PWD
+  - sudo apt-get install tomcat6
+install: 
+  - ant default
+notifications:
+  email:
+    recipients:
+      - brucellino@gmail.com
+      - Marco.Fargetta@ct.infn.it
