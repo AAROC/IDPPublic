@@ -28,9 +28,9 @@ limitations under the License.
 <%@include file="WEB-INF/jspf/header.jspf" %>
 
 <h2>Error!</h2>
-
-An error occur during the registration.
-Please, try again to register and if the problem persists, send an email to <a href="mailto:bbecker@csir.sagrid.ac.za">IDP Admin</a>.
+Oh no ! An error occur during the registration.... don't worry, it's probably something minor. Please try again...
+<p>
+If the problem persists, send an email to <a href="mailto:CHANGEME">IDP Admin</a>.
 
     <s:form action="login.action" method="POST">
         <s:submit name="back" value="Back"/>
