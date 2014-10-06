@@ -13,13 +13,13 @@
 
                     <b>Identity Provider documentation </b>
                 <ul>
-                    <li>Policies and procedures of the IDPOPEN Identity Provider are in the finalisation stage and they will published here as soon as they will become available.</li>
+                    <li>Policies and procedures of the IDP Identity Provider are in the finalisation stage and they will published here as soon as they will become available.</li>
                 </ul>
 
                 <b>Software</b>
 
                 <p>
-                    IDPOPEN is based on the <a href="http://shibboleth.internet2.edu/">Shibboleth</a> software, of the American research and educational network <a href="http://www.internet2.edu/">Internet2</a>.
+                    IDP is based on the <a href="http://shibboleth.internet2.edu/">Shibboleth</a> software, of the American research and educational network <a href="http://www.internet2.edu/">Internet2</a>.
 
                 </p>
 
@@ -29,7 +29,7 @@
 
                 <b>Metadata</b>
                 <ul>
-                    <li><a href="https://idpopen.garr.it/idp/shibboleth">Identity Provider's metadata</a></li>
+                    <li><a href="/metadata/idp-metadata.xml">Identity Provider's metadata</a></li>
                 </ul>
 
 

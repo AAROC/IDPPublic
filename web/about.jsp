@@ -13,7 +13,7 @@ The SAGrid Catch-All Identity Provider is a demonstration service developed in c
 <h3>An IdP at your own institute ?</h3>
 If you're interested in deploying a demo IdP at your own institute and having it registered in the Catch-All Federation, we can help. This IdP is based on the <a href="http://shibboleth.internet2.edu/">Shibboleth</a>, developed by <a href="http://www.internet2.edu/">Internet2</a>. For the installation and configuration of Shibboleth, the <a href="http://www.switch.ch/aai/support/">documentation of the Swiss research and technology network (SWITCH)'s federation;</a> <a href="https://spaces.internet2.edu/display/SHIB/">Shibboleth's Wiki</a> is an excellent documentation resource. 
 <h3>Metadata</h3>
-Should you have a service which would like to be able to authenticate users from this identity provider, you can find the metatadata at <a href="https://idp.sagrid.ac.za/idp/shibboleth">https://idp.sagrid.ac.za/idp/shibboleth</a>
+Should you have a service which would like to be able to authenticate users from this identity provider, you can find the metatadata <a href="/metadata/idp-metadata.xml">here</a>
 
 
 
