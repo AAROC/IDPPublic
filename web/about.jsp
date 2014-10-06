@@ -27,5 +27,4 @@ This IdP is based on <a href="http://shibboleth.internet2.edu/">Shibboleth</a>, 
 Should you have a service which would like to be able to authenticate users from this identity provider, you can find the metatadata at CHANGEME
 
 
-
 <%@include file="WEB-INF/jspf/footer.jspf" %>

@@ -26,7 +26,7 @@
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
-<!--
+
     <security-constraint>
         <display-name>General</display-name>
         <web-resource-collection>
@@ -39,7 +39,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
--->
+
         <resource-ref>
         <description>Configurazione mail per notifica utenti</description>
         <res-ref-name>mail/Users</res-ref-name>
