@@ -42,8 +42,8 @@
                 </ul>
             </div>
             <div id="slider" class="nivoSlider">
-                <img src="img/logo-1.png" alt="" />
-                <img src="img/Logo.jpg" alt="" />
+                <img src="img/home_imm_1.png" alt="" />
+                <!--img src="img/Logo.jpg" alt="" /-->
             </div>
 
             <div id="wrap">
