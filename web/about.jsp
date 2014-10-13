@@ -14,7 +14,7 @@
 <p>
 You probably use an Identity Provider already - such as google or facebook - and many public institutions have individual identity services for their users. In order for service providers to trust identities from other institutes, a trusted environment - or federation - is needed. For more information about Identity Federations, see <a href="http://en.wikipedia.org/wiki/Federated_identity">the Wikipedia entry</a> on Identity Federations, or the <a href="http://www.geant.net/service/eduGAIN/Pages/home.aspx">the GEANT Edugain</a> project.
 
-<%-- Include some information about your IdP below, by editing the CHANGEME sections -->
+<%-- Include some information about your IdP below, by editing the CHANGEME sections --%>
 <h3>About the CHANGEME Identity Provider</h3>
 The CHANGEME Catch-All Identity Provider is a demonstration service
 
