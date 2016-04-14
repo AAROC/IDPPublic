@@ -54,7 +54,7 @@ public class PassReset extends ActionSupport{
         return password;
     }
 
-    @StringLengthFieldValidator(message = "Minimum password lenght is 8 characters", minLength = "8")
+    @StringLengthFieldValidator(message = "Minimum password length is 8 characters", minLength = "8")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -76,6 +76,7 @@ public class PassReset extends ActionSupport{
         if(!password.equals(password2)){
             addFieldError("password", "Passwords do not match");
         }
+    // @fmarco76 : We could add a check here to see whether the new password is the same as the previous one ? 
     }
 
     @Override
